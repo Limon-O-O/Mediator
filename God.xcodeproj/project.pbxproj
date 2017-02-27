@@ -12,7 +12,38 @@
 		EDF72B8F1E63D4EA00B1ACAF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EDF72B8D1E63D4EA00B1ACAF /* Main.storyboard */; };
 		EDF72B911E63D4EA00B1ACAF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EDF72B901E63D4EA00B1ACAF /* Assets.xcassets */; };
 		EDF72B941E63D4EA00B1ACAF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EDF72B921E63D4EA00B1ACAF /* LaunchScreen.storyboard */; };
+		EDF72BA41E63D50B00B1ACAF /* Mediator.h in Headers */ = {isa = PBXBuildFile; fileRef = EDF72BA21E63D50B00B1ACAF /* Mediator.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EDF72BA71E63D50B00B1ACAF /* Mediator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDF72BA01E63D50B00B1ACAF /* Mediator.framework */; };
+		EDF72BA81E63D50B00B1ACAF /* Mediator.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = EDF72BA01E63D50B00B1ACAF /* Mediator.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		EDF72BAE1E63D51700B1ACAF /* Mediator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF72BAD1E63D51700B1ACAF /* Mediator.swift */; };
+		EDF72BB31E63DE1100B1ACAF /* Mediator+Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF72BB21E63DE1100B1ACAF /* Mediator+Login.swift */; };
+		EDF72BB61E63DF3300B1ACAF /* Target_Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF72BB51E63DF3300B1ACAF /* Target_Login.swift */; };
+		EDF72BB81E63DF5800B1ACAF /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF72BB71E63DF5800B1ACAF /* LoginViewController.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		EDF72BA51E63D50B00B1ACAF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EDF72B7E1E63D4EA00B1ACAF /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = EDF72B9F1E63D50B00B1ACAF;
+			remoteInfo = Mediator;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		EDF72BAC1E63D50B00B1ACAF /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				EDF72BA81E63D50B00B1ACAF /* Mediator.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		EDF72B861E63D4EA00B1ACAF /* God.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = God.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -22,10 +53,25 @@
 		EDF72B901E63D4EA00B1ACAF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EDF72B931E63D4EA00B1ACAF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EDF72B951E63D4EA00B1ACAF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EDF72BA01E63D50B00B1ACAF /* Mediator.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Mediator.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EDF72BA21E63D50B00B1ACAF /* Mediator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Mediator.h; sourceTree = "<group>"; };
+		EDF72BA31E63D50B00B1ACAF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EDF72BAD1E63D51700B1ACAF /* Mediator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Mediator.swift; sourceTree = "<group>"; };
+		EDF72BB21E63DE1100B1ACAF /* Mediator+Login.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Mediator+Login.swift"; sourceTree = "<group>"; };
+		EDF72BB51E63DF3300B1ACAF /* Target_Login.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Target_Login.swift; sourceTree = "<group>"; };
+		EDF72BB71E63DF5800B1ACAF /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		EDF72B831E63D4EA00B1ACAF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EDF72BA71E63D50B00B1ACAF /* Mediator.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EDF72B9C1E63D50B00B1ACAF /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -39,6 +85,7 @@
 			isa = PBXGroup;
 			children = (
 				EDF72B881E63D4EA00B1ACAF /* God */,
+				EDF72BA11E63D50B00B1ACAF /* Mediator */,
 				EDF72B871E63D4EA00B1ACAF /* Products */,
 			);
 			sourceTree = "<group>";
@@ -47,6 +94,7 @@
 			isa = PBXGroup;
 			children = (
 				EDF72B861E63D4EA00B1ACAF /* God.app */,
+				EDF72BA01E63D50B00B1ACAF /* Mediator.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -54,6 +102,7 @@
 		EDF72B881E63D4EA00B1ACAF /* God */ = {
 			isa = PBXGroup;
 			children = (
+				EDF72BAF1E63DDCF00B1ACAF /* LoginModule */,
 				EDF72B891E63D4EA00B1ACAF /* AppDelegate.swift */,
 				EDF72B8B1E63D4EA00B1ACAF /* ViewController.swift */,
 				EDF72B8D1E63D4EA00B1ACAF /* Main.storyboard */,
@@ -64,7 +113,62 @@
 			path = God;
 			sourceTree = "<group>";
 		};
+		EDF72BA11E63D50B00B1ACAF /* Mediator */ = {
+			isa = PBXGroup;
+			children = (
+				EDF72BA21E63D50B00B1ACAF /* Mediator.h */,
+				EDF72BAD1E63D51700B1ACAF /* Mediator.swift */,
+				EDF72BA31E63D50B00B1ACAF /* Info.plist */,
+			);
+			path = Mediator;
+			sourceTree = "<group>";
+		};
+		EDF72BAF1E63DDCF00B1ACAF /* LoginModule */ = {
+			isa = PBXGroup;
+			children = (
+				EDF72BB01E63DE0700B1ACAF /* Login */,
+				EDF72BB11E63DE0700B1ACAF /* Mediator+Login */,
+			);
+			path = LoginModule;
+			sourceTree = "<group>";
+		};
+		EDF72BB01E63DE0700B1ACAF /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				EDF72BB71E63DF5800B1ACAF /* LoginViewController.swift */,
+				EDF72BB41E63DF2600B1ACAF /* Targets */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		EDF72BB11E63DE0700B1ACAF /* Mediator+Login */ = {
+			isa = PBXGroup;
+			children = (
+				EDF72BB21E63DE1100B1ACAF /* Mediator+Login.swift */,
+			);
+			path = "Mediator+Login";
+			sourceTree = "<group>";
+		};
+		EDF72BB41E63DF2600B1ACAF /* Targets */ = {
+			isa = PBXGroup;
+			children = (
+				EDF72BB51E63DF3300B1ACAF /* Target_Login.swift */,
+			);
+			path = Targets;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		EDF72B9D1E63D50B00B1ACAF /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EDF72BA41E63D50B00B1ACAF /* Mediator.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
 		EDF72B851E63D4EA00B1ACAF /* God */ = {
@@ -74,15 +178,35 @@
 				EDF72B821E63D4EA00B1ACAF /* Sources */,
 				EDF72B831E63D4EA00B1ACAF /* Frameworks */,
 				EDF72B841E63D4EA00B1ACAF /* Resources */,
+				EDF72BAC1E63D50B00B1ACAF /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				EDF72BA61E63D50B00B1ACAF /* PBXTargetDependency */,
 			);
 			name = God;
 			productName = God;
 			productReference = EDF72B861E63D4EA00B1ACAF /* God.app */;
 			productType = "com.apple.product-type.application";
+		};
+		EDF72B9F1E63D50B00B1ACAF /* Mediator */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EDF72BA91E63D50B00B1ACAF /* Build configuration list for PBXNativeTarget "Mediator" */;
+			buildPhases = (
+				EDF72B9B1E63D50B00B1ACAF /* Sources */,
+				EDF72B9C1E63D50B00B1ACAF /* Frameworks */,
+				EDF72B9D1E63D50B00B1ACAF /* Headers */,
+				EDF72B9E1E63D50B00B1ACAF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Mediator;
+			productName = Mediator;
+			productReference = EDF72BA01E63D50B00B1ACAF /* Mediator.framework */;
+			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
 
@@ -96,6 +220,11 @@
 				TargetAttributes = {
 					EDF72B851E63D4EA00B1ACAF = {
 						CreatedOnToolsVersion = 8.2.1;
+						ProvisioningStyle = Automatic;
+					};
+					EDF72B9F1E63D50B00B1ACAF = {
+						CreatedOnToolsVersion = 8.2.1;
+						LastSwiftMigration = 0820;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -114,6 +243,7 @@
 			projectRoot = "";
 			targets = (
 				EDF72B851E63D4EA00B1ACAF /* God */,
+				EDF72B9F1E63D50B00B1ACAF /* Mediator */,
 			);
 		};
 /* End PBXProject section */
@@ -129,6 +259,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		EDF72B9E1E63D50B00B1ACAF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -136,12 +273,31 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EDF72BB61E63DF3300B1ACAF /* Target_Login.swift in Sources */,
 				EDF72B8C1E63D4EA00B1ACAF /* ViewController.swift in Sources */,
 				EDF72B8A1E63D4EA00B1ACAF /* AppDelegate.swift in Sources */,
+				EDF72BB81E63DF5800B1ACAF /* LoginViewController.swift in Sources */,
+				EDF72BB31E63DE1100B1ACAF /* Mediator+Login.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EDF72B9B1E63D50B00B1ACAF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EDF72BAE1E63D51700B1ACAF /* Mediator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		EDF72BA61E63D50B00B1ACAF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = EDF72B9F1E63D50B00B1ACAF /* Mediator */;
+			targetProxy = EDF72BA51E63D50B00B1ACAF /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		EDF72B8D1E63D4EA00B1ACAF /* Main.storyboard */ = {
@@ -203,7 +359,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -246,7 +402,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -257,6 +413,7 @@
 		EDF72B991E63D4EA00B1ACAF /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = God/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -269,12 +426,62 @@
 		EDF72B9A1E63D4EA00B1ACAF /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = God/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = top.limon.God;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+		EDF72BAA1E63D50B00B1ACAF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = Mediator/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = top.limon.Mediator;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		EDF72BAB1E63D50B00B1ACAF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = Mediator/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = top.limon.Mediator;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
 			};
 			name = Release;
 		};
@@ -297,6 +504,16 @@
 				EDF72B9A1E63D4EA00B1ACAF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EDF72BA91E63D50B00B1ACAF /* Build configuration list for PBXNativeTarget "Mediator" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EDF72BAA1E63D50B00B1ACAF /* Debug */,
+				EDF72BAB1E63D50B00B1ACAF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

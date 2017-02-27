@@ -7,19 +7,23 @@
 //
 
 import UIKit
+import Mediator
 
 class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+
+        let callbackAction: ([String: Any]) -> Void = { info in
+            print("Login callbacked with info: \(info)")
+        }
+
+        let login = Mediator.shared.loginViewController(with: UIColor.red, callbackAction: callbackAction)!
+        navigationController?.pushViewController(login, animated: true)
     }
-
-
 }
 
