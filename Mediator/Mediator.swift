@@ -8,9 +8,11 @@
 
 import Foundation
 
-public class Mediator: NSObject {
+public class Mediator {
 
     public static let shared = Mediator()
+
+    private init() {}
 
     fileprivate lazy var cachedTarget: [String: NSObject] = [:]
 }
@@ -23,11 +25,9 @@ extension Mediator {
     /// aaa://targetA/actionB?id=1234
     public func performAction(with url: URL) -> NSObject? {
 
-        var params: [String: Any] = [:]
+        guard let urlString = url.query else { return nil }
 
-        guard let urlString = url.query else {
-            return nil
-        }
+        var params: [String: Any] = [:]
 
         for param in urlString.components(separatedBy: "&") {
             let elts = param.components(separatedBy: "=")
@@ -39,14 +39,10 @@ extension Mediator {
 
         // 这里这么写主要是出于安全考虑，防止黑客通过远程方式调用本地模块。这里的做法足以应对绝大多数场景，如果要求更加严苛，也可以做更加复杂的安全逻辑。
         let actionName = url.path.replacingOccurrences(of: "/", with: "")
-        if actionName.hasPrefix("native") {
-            return nil
-        }
+        if actionName.hasPrefix("native") { return nil }
 
         // 这个 demo 针对 URL 的路由处理非常简单，就只是取对应的 target 名字和 method 名字，但这已经足以应对绝大部份需求。如果需要拓展，可以在这个方法调用之前加入完整的路由逻辑
-        guard let host = url.host else {
-            return nil
-        }
+        guard let host = url.host else { return nil }
 
         return performTarget(host, action: actionName, params: params)
     }
