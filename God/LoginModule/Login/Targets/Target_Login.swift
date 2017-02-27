@@ -16,4 +16,13 @@ class Target_Login: NSObject {
         viewController.innateParams = params
         return viewController
     }
+
+    /// 返回值必须是 NSObject，不然 `perform(_ aSelector: Selector!, with object: Any!)` 找不到方法
+    func Action_DidLogin() -> [String: Any] {
+        return ["result": true]
+    }
+
+    func Action_NotFound(params: [String: Any]) {
+        print("Not Found. params: \(params)")
+    }
 }

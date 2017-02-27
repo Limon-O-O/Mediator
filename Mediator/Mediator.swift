@@ -12,13 +12,16 @@ public class Mediator: NSObject {
 
     public static let shared = Mediator()
 
-    private lazy var cachedTarget: [String: AnyObject] = [:]
+    fileprivate lazy var cachedTarget: [String: NSObject] = [:]
+}
+
+extension Mediator {
 
     /// 远程App调用入口
     /// scheme://[target]/[action]?[params]
     /// url sample:
     /// aaa://targetA/actionB?id=1234
-    public func performAction(with url: URL) -> AnyObject? {
+    public func performAction(with url: URL) -> NSObject? {
 
         var params: [String: Any] = [:]
 
@@ -40,7 +43,7 @@ public class Mediator: NSObject {
             return nil
         }
 
-        // 这个demo针对URL的路由处理非常简单，就只是取对应的target名字和method名字，但这已经足以应对绝大部份需求。如果需要拓展，可以在这个方法调用之前加入完整的路由逻辑
+        // 这个 demo 针对 URL 的路由处理非常简单，就只是取对应的 target 名字和 method 名字，但这已经足以应对绝大部份需求。如果需要拓展，可以在这个方法调用之前加入完整的路由逻辑
         guard let host = url.host else {
             return nil
         }
@@ -49,14 +52,14 @@ public class Mediator: NSObject {
     }
 
     /// 本地组件调用入口
-    public func performTarget(_ targetName: String, action actionName: String, params: [String: Any], shouldCacheTarget: Bool = false) -> AnyObject? {
+    public func performTarget(_ targetName: String, action actionName: String, params: [String: Any], shouldCacheTarget: Bool = false) -> NSObject? {
 
         let targetClassString = String(format: "Target_%@", targetName)
 
         let target = cachedTarget[targetClassString] ?? (NSClassFromString(targetClassString) as? NSObject.Type)?.init()
 
         guard let unwrappedTarget = target else {
-            // 这里是处理无响应请求的地方之一，这个demo做得比较简单，如果没有可以响应的target，就直接return了。实际开发过程中是可以事先给一个固定的target专门用于在这个时候顶上，然后处理这种请求的
+            // 这里是处理无响应请求的地方之一，这个 demo 做得比较简单，如果没有可以响应的 target，就直接 return 了。实际开发过程中是可以事先给一个固定的 target 专门用于在这个时候顶上，然后处理这种请求的
             return nil
         }
 
@@ -64,32 +67,33 @@ public class Mediator: NSObject {
             self.cachedTarget[targetClassString] = unwrappedTarget
         }
 
+        var result: AnyObject?
         let actionString = String(format: "Action_%@", actionName)
-        let action = NSSelectorFromString(actionString)
+        let action = Selector(actionString)
 
         if unwrappedTarget.responds(to: action) {
-            return unwrappedTarget.perform(action, with: params).takeUnretainedValue()
+            result = unwrappedTarget.perform(action, with: params)?.takeUnretainedValue()
         } else {
-            // 有可能target是Swift对象
+
             let actionString = String(format: "Action_%@WithParams:", actionName)
-            let action = NSSelectorFromString(actionString)
+            let action = Selector(actionString)
 
             if unwrappedTarget.responds(to: action) {
-                return unwrappedTarget.perform(action, with: params).takeUnretainedValue()
+                result = unwrappedTarget.perform(action, with: params)?.takeUnretainedValue()
             } else {
 
-                // 这里是处理无响应请求的地方，如果无响应，则尝试调用对应target的notFound方法统一处理
-                let action = NSSelectorFromString("notFound:")
-
+                // 这里是处理无响应请求的地方，如果无响应，则尝试调用对应 target 的 notFound 方法统一处理
+                let action = Selector(("Action_NotFoundWithParams:"))
                 if unwrappedTarget.responds(to: action) {
-                    return unwrappedTarget.perform(action, with: params).takeUnretainedValue()
+                    result = unwrappedTarget.perform(action, with: params)?.takeUnretainedValue()
                 } else {
-                    // 这里也是处理无响应请求的地方，在notFound都没有的时候，这个demo是直接return了。实际开发过程中，可以用前面提到的固定的target顶上的。
+                    // 这里也是处理无响应请求的地方，在 notFound 都没有的时候，这个 demo 是直接 return 了。实际开发过程中，可以用前面提到的固定的 target 顶上的。
                     cachedTarget.removeValue(forKey: targetClassString)
-                    return nil
                 }
             }
         }
+
+        return result as? NSObject
     }
 
     public func releaseCachedTarget(with targetName: String) {

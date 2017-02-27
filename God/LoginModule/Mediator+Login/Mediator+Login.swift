@@ -15,4 +15,9 @@ extension Mediator {
         let deliverParams: [String: Any] = ["color": color, "callbackAction": callbackAction]
         return performTarget("Login", action: "LoginViewController", params: deliverParams, shouldCacheTarget: false) as? UIViewController
     }
+
+    public func didLogin() -> Bool {
+        let result = performTarget("Login", action: "DidLogin", params: [:]) as? [String: Any]
+        return (result?["result"] as? Bool) ?? false
+    }
 }
