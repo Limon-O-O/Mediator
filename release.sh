@@ -47,7 +47,7 @@ getPodInfo() {
 }
 
 getVersion() {
-    read -p "Enter Version: " version
+    read -p "Enter New Version: " version
 
     if test -z "$version"; then
         getVersion
@@ -57,7 +57,7 @@ getVersion() {
 updateVersion() {
 
     # update .podspec file
-	while read line; do
+    while read line; do
         if [[ $line == *"s.version"*"="* ]]; then
             newLine=${line/$oldVersion/$version}
             sed -i '' "s#$line#$newLine#" "$podspecFilePath"
@@ -417,6 +417,9 @@ updateProjectVersion() {
 getPodInfo
 
 echo -e "\n"
+
+echo "Current Version: ${oldVersion}"
+
 while [ "$confirmed" != "y" -a "$confirmed" != "Y" ]
 do
     if [ "$confirmed" == "n" -o "$confirmed" == "N" ]; then
