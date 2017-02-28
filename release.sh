@@ -294,8 +294,6 @@ updateProjectVersion() {
     # We use PlistBuddy to handle the Info.plist values. Here we define where it lives.
     plistBuddy="/usr/libexec/PlistBuddy"
 
-    BGreen='\033[1;32m'
-
     # Parse input variables and update settings.
     for i in "$@"; do
     case $i in
@@ -399,16 +397,16 @@ updateProjectVersion() {
         thisBundleShortVersionString=$("${plistBuddy}" -c "Print CFBundleShortVersionString" "${thisPlist}")
         # Update the CFBundleVersion if needed
         if [[ ${thisBundleVersion} != ${mainBundleVersion} ]]; then
-            echo -e "${BGreen}Updating \"${thisPlist}\" with build ${mainBundleVersion}..."
+            echo -e "${BGreen}Updating \"${thisPlist}\" with build ${mainBundleVersion}...${Default}"
             "${plistBuddy}" -c "Set :CFBundleVersion ${mainBundleVersion}" "${thisPlist}"
         fi
         # Update the CFBundleShortVersionString if needed
         if [[ ${thisBundleShortVersionString} != ${mainBundleShortVersionString} ]]; then
-            echo -e "${BGreen}Updating \"${thisPlist}\" with marketing version ${mainBundleShortVersionString}..."
+            echo -e "${BGreen}Updating \"${thisPlist}\" with marketing version ${mainBundleShortVersionString}...${Default}"
             "${plistBuddy}" -c "Set :CFBundleShortVersionString ${mainBundleShortVersionString}" "${thisPlist}"
             git add "${thisPlist}"
         fi
-        echo -e "${BGreen}Current \"${thisPlist}\" version is ${mainBundleShortVersionString} (${mainBundleVersion})."
+        echo -e "${BGreen}Current \"${thisPlist}\" version is ${mainBundleShortVersionString} (${mainBundleVersion}).${Default}"
     done <<< "${plist}"
 }
 
@@ -416,9 +414,7 @@ updateProjectVersion() {
 
 getPodInfo
 
-echo -e "\n"
-
-echo "Current Version: ${oldVersion}"
+echo -e "\nCurrent Version: ${oldVersion}"
 
 while [ "$confirmed" != "y" -a "$confirmed" != "Y" ]
 do
@@ -432,11 +428,7 @@ done
 
 updateVersion
 
-echo ""
-
-echo "--------------------------------------------------------------------------------"
-
-echo ""
+echo -e "\n--------------------------------------------------------------------------------\n"
 
 git add "${podspecFilePath}"
 git add "./README.md"
@@ -446,14 +438,10 @@ git push
 git tag "${version}"
 git push --tags
 
-echo ""
-
-echo "--------------------------------------------------------------------------------"
+echo -e "\n--------------------------------------------------------------------------------"
 echo "Start pod trunk push \"${podName}.podspec\" --allow-warnings"
 
 pod trunk push "${podName}.podspec" --allow-warnings
 
-echo -e "\n"
-
 say "finished"
-echo "finished"
+echo -e "\n${Default}🚀 Finished\n"
