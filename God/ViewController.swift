@@ -9,31 +9,30 @@
 import UIKit
 import Mediator
 
-public class User: NSObject {
+public struct User {
     let nickname = "Limon"
 }
 
 class Parent: NSObject {
-    func parentSelector(_ arg: String) {
-        print(" ---> Selected: \(arg)")
-    }
-    func test(_ selectorString: String, _ printString: String) {
-        let selector: Selector = Selector(selectorString)
-        if self.responds(to: selector) {
-            self.perform(selector, with: printString)
-        }
-    }
-}
 
-class Child: Parent {
+    func test(_ selectorString: String, _ printString: String) -> AnyObject? {
+        let selector: Selector = Selector(selectorString)
+        return self.perform(selector, with: printString)?.takeUnretainedValue()
+    }
+
+    func parentSelector(_ arg: String) -> [String: Any] {
+        return ["result": false]
+    }
+
     func childSelector(_ arg: String) -> User {
-        print(" ---> Child selected: \(arg)")
         return User()
     }
+
     func namedChildSelector(arg: String) {
         print(" ---> Child selected: \(arg)")
     }
 }
+
 
 class ViewController: UIViewController {
 
@@ -44,16 +43,18 @@ class ViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
-        /*
         let parent = Parent()
-        let child = Child()
 
-        parent.test("parentSelector:", "apple") // Works
-        child.test("parentSelector:", "banana") // Works
-        child.test("childSelector:", "coffee") // Works
-        child.test("namedChildSelectorWithArg:", "daffodil")
-        */
+        let result = parent.test("parentSelector:", "coffee") // Works
+        print(result as! [String: Any])
 
+        let user = parent.test("childSelector:", "apple") // No Works
+        print(user as! User)
+
+        // parent.test("namedChildSelectorWithArg:", "daffodil")
+
+
+        /*
         let callbackAction: ([String: Any]) -> Void = { info in
             print("Login callbacked with info: \(info)")
         }
@@ -62,6 +63,7 @@ class ViewController: UIViewController {
         navigationController?.pushViewController(login, animated: true)
 
         print("Did Login: \(Mediator.shared.didLogin())")
+        */
     }
 }
 
