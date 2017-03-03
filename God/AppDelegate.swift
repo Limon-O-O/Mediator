@@ -46,4 +46,12 @@ extension AppDelegate: Coolie {
         print("Mediator can not match `user` or `password` of url: \(url)")
         return false
     }
+
+    func mediatorNotFound(_ target: String) {
+        print("Mediator not found \(target)")
+    }
+
+    func mediatorNotFound(_ action: String, of target: NSObject) {
+        print("Mediator not found \(action) of \(target)")
+    }
 }

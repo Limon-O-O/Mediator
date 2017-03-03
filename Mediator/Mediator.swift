@@ -8,17 +8,6 @@
 
 import Foundation
 
-public protocol Coolie: class {
-
-    func mediatorCannotParse(_ url: URL)
-    func mediatorCannotMatchScheme(of url: URL)
-    func mediatorCannotMatch(_ target: String, action: String, of url: URL)
-
-    /// 无法匹配 User 或 Password
-    /// return 是否允许继续执行
-    func mediatorCannotMatch(_ user: String, password: String, of url: URL) -> Bool
-}
-
 public class Mediator {
 
     public static let shared = Mediator()
@@ -87,7 +76,7 @@ extension Mediator {
         let target = cachedTarget[targetClassString] ?? (NSClassFromString(targetClassString) as? NSObject.Type)?.init()
 
         guard let unwrappedTarget = target else {
-            // 这里是处理无响应请求的地方之一，这个 demo 做得比较简单，如果没有可以响应的 target，就直接 return 了。实际开发过程中是可以事先给一个固定的 target 专门用于在这个时候顶上，然后处理这种请求的
+            coolie?.mediatorNotFound(targetName)
             return nil
         }
 
@@ -101,6 +90,7 @@ extension Mediator {
 
         if unwrappedTarget.responds(to: action) {
             result = unwrappedTarget.perform(action, with: params)?.takeUnretainedValue()
+
         } else {
 
             let actionString = String(format: "Action_%@WithParams:", actionName)
@@ -110,12 +100,13 @@ extension Mediator {
                 result = unwrappedTarget.perform(action, with: params)?.takeUnretainedValue()
             } else {
 
-                // 这里是处理无响应请求的地方，如果无响应，则尝试调用对应 target 的 notFound 方法统一处理
+                // 处理无响应请求，尝试调用对应 target 的 NotFound 方法统一处理
                 let action = Selector(("Action_NotFoundWithParams:"))
                 if unwrappedTarget.responds(to: action) {
                     result = unwrappedTarget.perform(action, with: params)?.takeUnretainedValue()
                 } else {
-                    // 这里也是处理无响应请求的地方，在 notFound 都没有的时候，这个 demo 是直接 return 了。实际开发过程中，可以用前面提到的固定的 target 顶上的。
+                    // 对应的 target 也无实现 NotFound 方法
+                    coolie?.mediatorNotFound(actionName, of: unwrappedTarget)
                     cachedTarget.removeValue(forKey: targetClassString)
                 }
             }
@@ -123,7 +114,9 @@ extension Mediator {
 
         return result as? NSObject
     }
+}
 
+extension Mediator {
     public func releaseCachedTarget(with targetName: String) {
         let targetClassString = String(format: "Target_%@", targetName)
         cachedTarget.removeValue(forKey: targetClassString)
