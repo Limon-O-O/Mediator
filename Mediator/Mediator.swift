@@ -8,43 +8,75 @@
 
 import Foundation
 
+public protocol Coolie: class {
+
+    func mediatorCannotParse(_ url: URL)
+    func mediatorCannotMatchScheme(of url: URL)
+    func mediatorCannotMatch(_ target: String, action: String, of url: URL)
+
+    /// 无法匹配 User 或 Password
+    /// return 是否允许继续执行
+    func mediatorCannotMatch(_ user: String, password: String, of url: URL) -> Bool
+}
+
 public class Mediator {
 
     public static let shared = Mediator()
 
+    public weak var coolie: Coolie?
+
+    public var urlRouteMapConfigure: URLRouteMapConfigure?
+
     private init() {}
 
     fileprivate lazy var cachedTarget: [String: NSObject] = [:]
+
+    fileprivate lazy var urlRouteMap: URLRouteMap? = {
+        guard let filePath = self.urlRouteMapConfigure?.routeMapFilePath else { return nil }
+        return URLRouteMap(filePath: filePath)
+    }()
 }
 
 extension Mediator {
 
-    /// 远程App调用入口
-    /// scheme://[target]/[action]?[params]
+    /// 远程调用入口
+    /// scheme://[user]:[password]@[target]/[action]?[params]
     /// url sample:
-    /// aaa://targetA/actionB?id=1234
+    /// "myapp://Limon:123456@targetA/actionB?id=1234&page=2"
     public func performAction(with url: URL) -> NSObject? {
 
-        guard let urlString = url.query else { return nil }
-
-        var params: [String: Any] = [:]
-
-        for param in urlString.components(separatedBy: "&") {
-            let elts = param.components(separatedBy: "=")
-            if elts.count < 2 {
-                continue
-            }
-            params[elts.first!] = elts.last!
+        guard let routeMapConfigure = urlRouteMapConfigure else {
+            assert(false, "urlRouteMapConfigure is empty!")
+            return nil
         }
 
-        // 这里这么写主要是出于安全考虑，防止黑客通过远程方式调用本地模块。这里的做法足以应对绝大多数场景，如果要求更加严苛，也可以做更加复杂的安全逻辑。
-        let actionName = url.path.replacingOccurrences(of: "/", with: "")
-        if actionName.hasPrefix("native") { return nil }
+        guard let parser = Parser(url: url) else {
+            coolie?.mediatorCannotParse(url)
+            return nil
+        }
 
-        // 这个 demo 针对 URL 的路由处理非常简单，就只是取对应的 target 名字和 method 名字，但这已经足以应对绝大部份需求。如果需要拓展，可以在这个方法调用之前加入完整的路由逻辑
-        guard let host = url.host else { return nil }
+        if routeMapConfigure.scheme != parser.scheme {
+            coolie?.mediatorCannotMatchScheme(of: url)
+            return nil
+        }
 
-        return performTarget(host, action: actionName, params: params)
+        guard let urlRouteMap = urlRouteMap, let target = urlRouteMap[parser.target], let action = target.actions[parser.action] else {
+            coolie?.mediatorCannotMatch(parser.target, action: parser.action, of: url)
+            return nil
+        }
+
+        if target.allVerifySkip {
+            return performTarget(target.name, action: action.name, params: parser.params)
+        }
+
+        if (parser.user != routeMapConfigure.user || parser.password != routeMapConfigure.password) && !action.verifySkip {
+            let next = coolie?.mediatorCannotMatch(parser.user, password: parser.password, of: url) ?? false
+            if !next {
+                return nil
+            }
+        }
+
+        return performTarget(target.name, action: action.name, params: parser.params)
     }
 
     /// 本地组件调用入口
@@ -97,3 +129,5 @@ extension Mediator {
         cachedTarget.removeValue(forKey: targetClassString)
     }
 }
+
+

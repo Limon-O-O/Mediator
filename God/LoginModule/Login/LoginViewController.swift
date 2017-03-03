@@ -15,7 +15,7 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Login"
-        view.backgroundColor = innateParams["color"] as? UIColor
+        view.backgroundColor = (innateParams["color"] as? UIColor) ?? UIColor.white
     }
 
     override func viewDidDisappear(_ animated: Bool) {

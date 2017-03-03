@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		ED8A89941E693AB900C1DA46 /* RouteMapTemplate.plist in Resources */ = {isa = PBXBuildFile; fileRef = ED8A89931E693AB900C1DA46 /* RouteMapTemplate.plist */; };
+		ED8A89961E6966B400C1DA46 /* URLRouteMapConfigure.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED8A89951E6966B400C1DA46 /* URLRouteMapConfigure.swift */; };
 		EDF72B8A1E63D4EA00B1ACAF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF72B891E63D4EA00B1ACAF /* AppDelegate.swift */; };
 		EDF72B8C1E63D4EA00B1ACAF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF72B8B1E63D4EA00B1ACAF /* ViewController.swift */; };
 		EDF72B8F1E63D4EA00B1ACAF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EDF72B8D1E63D4EA00B1ACAF /* Main.storyboard */; };
@@ -46,6 +48,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		ED8A89931E693AB900C1DA46 /* RouteMapTemplate.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = RouteMapTemplate.plist; sourceTree = "<group>"; };
+		ED8A89951E6966B400C1DA46 /* URLRouteMapConfigure.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLRouteMapConfigure.swift; sourceTree = "<group>"; };
 		EDF72B861E63D4EA00B1ACAF /* God.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = God.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EDF72B891E63D4EA00B1ACAF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EDF72B8B1E63D4EA00B1ACAF /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -109,6 +113,7 @@
 				EDF72B901E63D4EA00B1ACAF /* Assets.xcassets */,
 				EDF72B921E63D4EA00B1ACAF /* LaunchScreen.storyboard */,
 				EDF72B951E63D4EA00B1ACAF /* Info.plist */,
+				ED8A89931E693AB900C1DA46 /* RouteMapTemplate.plist */,
 			);
 			path = God;
 			sourceTree = "<group>";
@@ -118,6 +123,7 @@
 			children = (
 				EDF72BA21E63D50B00B1ACAF /* Mediator.h */,
 				EDF72BAD1E63D51700B1ACAF /* Mediator.swift */,
+				ED8A89951E6966B400C1DA46 /* URLRouteMapConfigure.swift */,
 				EDF72BA31E63D50B00B1ACAF /* Info.plist */,
 			);
 			path = Mediator;
@@ -254,6 +260,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EDF72B941E63D4EA00B1ACAF /* LaunchScreen.storyboard in Resources */,
+				ED8A89941E693AB900C1DA46 /* RouteMapTemplate.plist in Resources */,
 				EDF72B911E63D4EA00B1ACAF /* Assets.xcassets in Resources */,
 				EDF72B8F1E63D4EA00B1ACAF /* Main.storyboard in Resources */,
 			);
@@ -286,6 +293,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EDF72BAE1E63D51700B1ACAF /* Mediator.swift in Sources */,
+				ED8A89961E6966B400C1DA46 /* URLRouteMapConfigure.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

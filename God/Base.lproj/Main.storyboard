@@ -20,7 +20,29 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bQ5-on-74o">
+                                <rect key="frame" x="126" y="517" width="123" height="30"/>
+                                <state key="normal" title="Test_Remote_URL"/>
+                                <connections>
+                                    <action selector="testURL:" destination="BYZ-38-t0r" eventType="touchUpInside" id="G4S-EJ-bXJ"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tp3-s8-EEY">
+                                <rect key="frame" x="172" y="318.5" width="30" height="30"/>
+                                <state key="normal" title="Test"/>
+                                <connections>
+                                    <action selector="test:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Jqx-Ts-EL7"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="bQ5-on-74o" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="apu-Qc-BiT"/>
+                            <constraint firstItem="Tp3-s8-EEY" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="bST-Qe-Laz"/>
+                            <constraint firstItem="Tp3-s8-EEY" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="ord-wJ-aO7"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="bQ5-on-74o" secondAttribute="bottom" constant="120" id="vTO-i1-fbe"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Cre-Kf-vgf"/>
                 </viewController>
