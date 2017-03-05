@@ -20,6 +20,9 @@ public protocol Coolie: class {
 
     func mediatorNotFound(_ target: String)
     func mediatorNotFound(_ action: String, of target: NSObject)
+
+    /// 需要权限才能触发 Target-Action
+    func mediatorRequestPermission(with successHandler: @escaping () -> Void)
 }
 
 extension Coolie {
@@ -31,4 +34,6 @@ extension Coolie {
 
     public func mediatorNotFound(_ target: String) {}
     public func mediatorNotFound(_ action: String, of target: NSObject) {}
+
+    public func mediatorRequestPermission(with successHandler: @escaping () -> Void) {}
 }

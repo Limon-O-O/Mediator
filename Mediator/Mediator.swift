@@ -84,35 +84,51 @@ extension Mediator {
             self.cachedTarget[targetClassString] = unwrappedTarget
         }
 
-        var result: AnyObject?
         let actionString = String(format: "Action_%@", actionName)
         let action = Selector(actionString)
 
-        if unwrappedTarget.responds(to: action) {
-            result = unwrappedTarget.perform(action, with: params)?.takeUnretainedValue()
+        let perform: () -> NSObject? = { [weak self] in
 
-        } else {
-
-            let actionString = String(format: "Action_%@WithParams:", actionName)
-            let action = Selector(actionString)
+            var result: AnyObject?
 
             if unwrappedTarget.responds(to: action) {
                 result = unwrappedTarget.perform(action, with: params)?.takeUnretainedValue()
             } else {
+                let actionString = String(format: "Action_%@WithParams:", actionName)
+                let action = Selector(actionString)
 
-                // 处理无响应请求，尝试调用对应 target 的 NotFound 方法统一处理
-                let action = Selector(("Action_NotFoundWithParams:"))
                 if unwrappedTarget.responds(to: action) {
                     result = unwrappedTarget.perform(action, with: params)?.takeUnretainedValue()
                 } else {
-                    // 对应的 target 也无实现 NotFound 方法
-                    coolie?.mediatorNotFound(actionName, of: unwrappedTarget)
-                    cachedTarget.removeValue(forKey: targetClassString)
+                    // 处理无响应请求，尝试调用对应 target 的 NotFound 方法统一处理
+                    let action = Selector(("Action_NotFoundWithParams:"))
+                    if unwrappedTarget.responds(to: action) {
+                        result = unwrappedTarget.perform(action, with: params)?.takeUnretainedValue()
+                    } else {
+                        // 对应的 target 也无实现 NotFound 方法
+                        self?.coolie?.mediatorNotFound(actionName, of: unwrappedTarget)
+                        _ = self?.cachedTarget.removeValue(forKey: targetClassString)
+                    }
                 }
             }
+
+            return result as? NSObject
         }
 
-        return result as? NSObject
+        // Before Action
+        let shouldLoginBeforeAction = Selector(("BeforeAction_ShouldLoginWithActionName:"))
+        if unwrappedTarget.responds(to: shouldLoginBeforeAction) {
+            // 询问 target 需不需要登录，但还需要判断现在的登录状态，登录状态判断放在登录模块，这样其它模块不需要知道登录状态
+            if let shouldLogin = (unwrappedTarget.perform(shouldLoginBeforeAction, with: actionName)?.takeUnretainedValue() as? [String: Any])?["result"] as? Bool, shouldLogin {
+                let successHandler: () -> Void = {
+                    _ = perform()
+                }
+                coolie?.mediatorRequestPermission(with: successHandler)
+                return nil
+            }
+        }
+        
+        return perform()
     }
 }
 
