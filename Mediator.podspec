@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name        = "Mediator"
-  s.version     = "0.0.5"
+  s.version     = "0.0.6"
   s.summary     = "Mediator."
 
   s.description = <<-DESC
@@ -15,7 +15,7 @@ Pod::Spec.new do |s|
   s.author      = { "Limon" => "fengninglong@gmail.com" }
   s.social_media_url  = "https://twitter.com/Limon______"
 
-  s.ios.deployment_target   = "8.0"
+  s.ios.deployment_target   = "11.0"
 
   s.source          = { :git => "https://github.com/Limon-O-O/Mediator.git", :tag => s.version }
   s.source_files    = "Mediator/*.swift"
